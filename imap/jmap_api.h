@@ -57,7 +57,11 @@
 #include "ptrarray.h"
 #include "strarray.h"
 
+#define JMAP_INT_MAX    9007199254740991LL  /*  2^53-1 */
+#define JMAP_INT_MIN    (-JMAP_INT_MAX)     /* -2^53+1 */
+
 #define JMAP_URN_CORE       "urn:ietf:params:jmap:core"
+#define JMAP_URN_QUOTA      "urn:ietf:params:jmap:quota"
 #define JMAP_URN_MAIL       "urn:ietf:params:jmap:mail"
 #define JMAP_URN_SUBMISSION "urn:ietf:params:jmap:submission"
 #define JMAP_URN_VACATION   "urn:ietf:params:jmap:vacationresponse"
@@ -73,7 +77,6 @@
 #define JMAP_MAIL_EXTENSION          "https://cyrusimap.org/ns/jmap/mail"
 #define JMAP_PERFORMANCE_EXTENSION   "https://cyrusimap.org/ns/jmap/performance"
 #define JMAP_DEBUG_EXTENSION         "https://cyrusimap.org/ns/jmap/debug"
-#define JMAP_QUOTA_EXTENSION         "https://cyrusimap.org/ns/jmap/quota"
 #define JMAP_BACKUP_EXTENSION        "https://cyrusimap.org/ns/jmap/backup"
 #define JMAP_NOTES_EXTENSION         "https://cyrusimap.org/ns/jmap/notes"
 #define JMAP_SIEVE_EXTENSION         "https://cyrusimap.org/ns/jmap/sieve"
