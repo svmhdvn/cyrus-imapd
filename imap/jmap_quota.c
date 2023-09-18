@@ -241,7 +241,7 @@ static int fetch_quotas_cb(struct quota *q, void *rock)
 
         /* Add all other requests types
            and remove them if we find a type-specific quotaroot */
-        if (jmap_is_using(qrock->req, JMAP_URN_MAIL)) {
+        if (jmap_is_using(qrock->req, JMAP_URN_SUBMISSION)) {
             type_masks[QUOTA_STORAGE] |= JMAP_TYPE_EMAILSUBMISSION;
             type_masks[QUOTA_MESSAGE] |= JMAP_TYPE_EMAILSUBMISSION;
         }
@@ -389,6 +389,18 @@ static void fetch_quotas(struct qrock_t *qrock)
         }
 
         if (qrock->sieve_count) {
+            /* Get and set script count (used) */
+            struct sieve_db *db = sievedb_open_userid(qrock->req->accountid);
+
+            if (db) {
+                int used;
+
+                sievedb_count(db, &used);
+                sievedb_close(db);
+                qrock->sieve_count->used = used;
+            }
+
+            /* Set limit */
             qrock->sieve_count->limit = maxscripts;
         }
     }
